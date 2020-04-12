@@ -1,5 +1,5 @@
 from setuptools import setup
-from torch.utils.cpp_extension import BuildExtension, CPPExtension, CUDAExtension
+from torch.utils import cpp_extension
 
 package_name = "torchselfintersection"
 version = "0.1.0"
@@ -15,19 +15,21 @@ setup(
     long_description=long_description,
     requirements=requirements,
     ext_modules=[
-        CPPExtension(
-            "selfintersection.cpu",
-            [
+        cpp_extension.CppExtension(
+            name="torchselfintersection.cpu",
+            sources=[
                 "torchselfintersection/selfintersection_cpu.cpp",
             ],
+            include_dirs=cpp_extension.include_paths(),
+            language='c++',
         ),
-        CUDAExtension(
-            "selfintersection.cuda",
-            [
-                "torchselfintersection/selfintersection_cuda_wrapper.cpp",
-                "torchselfintersection/selfintersection.cu",
-            ],
-        ),
+        # CUDAExtension(
+        #     "selfintersection.cuda",
+        #     [
+        #         "torchselfintersection/selfintersection_cuda_wrapper.cpp",
+        #         "torchselfintersection/selfintersection.cu",
+        #     ],
+        # ),
     ],
-    cmdclass={"build_ext": BuildExtension},
+    cmdclass={"build_ext": cpp_extension.BuildExtension},
 )
