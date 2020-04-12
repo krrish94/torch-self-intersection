@@ -1,11 +1,11 @@
 import torch
-from torchselfintersection import cpu
+from torchselfintersection import selfintersection_cpu
 
 from torchselfintersection.selfintersections import SelfIntersections
 
 
 a = torch.rand(40, 9)
-x = cpu.forward(a)
+x = selfintersection_cpu.forward(a)
 m_py = SelfIntersections()
 x_py = m_py(a)
 print(a.shape, x.shape)

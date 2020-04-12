@@ -16,7 +16,7 @@ setup(
     requirements=requirements,
     ext_modules=[
         cpp_extension.CppExtension(
-            name="torchselfintersection.cpu",
+            name="torchselfintersection.selfintersection_cpu",
             sources=[
                 "torchselfintersection/selfintersection_cpu.cpp",
             ],
